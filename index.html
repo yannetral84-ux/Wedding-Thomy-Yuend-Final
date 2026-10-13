@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Thomy & Yuend</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* PENTING: scroll-behavior smooth DIMATIKAN saat auto-scroll aktif */
+        html { scroll-behavior: auto; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #0a0f1e;
+            color: #e2e8f0;
+            text-align: center;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .scroll-reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+        .scroll-reveal-left { opacity: 0; transform: translateX(-100px); transition: all 0.8s ease-out; }
+        .scroll-reveal-left.active { opacity: 1; transform: translateX(0); }
+        .scroll-reveal-right { opacity: 0; transform: translateX(100px); transition: all 0.8s ease-out; }
+        .scroll-reveal-right.active { opacity: 1; transform: translateX(0); }
+        .scroll-reveal-scale { opacity: 0; transform: scale(0.5); transition: all 0.8s ease-out; }
+        .scroll-reveal-scale.active { opacity: 1; transform: scale(1); }
+
+        #cover {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(rgba(10,15,30,0.7), rgba(10,15,30,0.9)), url('foto1.jpg') center/cover;
+            background-attachment: fixed;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; transition: transform 1s ease-in-out;
+        }
+        #cover.open { transform: translateY(-100%); }
+        .cover-content { animation: fadeInDown 1.5s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+        .cover-content h4 { color: #d4af37; letter-spacing: 3px; font-size: 1rem; animation: fadeIn 2s ease-out 0.5s both; }
+        .cover-content .nama { font-family: 'Great Vibes', cursive; font-size: 4rem; color: #d4af37; margin: 10px 0; animation: fadeIn 2s ease-out 1s both; }
+        .cover-content .dan { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #d4af37; animation: fadeIn 2s ease-out 1.5s both; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .btn-buka {
+            margin-top: 30px; padding: 15px 40px;
+            background: linear-gradient(135deg, #d4af37, #f0d060);
+            color: #0a0f1e; border: none; border-radius: 50px;
+            font-weight: bold; font-size: 1rem; cursor: pointer;
+            animation: pulse 2s infinite; transition: transform 0.3s;
+        }
+        .btn-buka:hover { transform: scale(1.1); }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); } 50% { box-shadow: 0 0 0 20px rgba(212,175,55,0); } }
+
+        .container { max-width: 700px; margin: 0 auto; padding: 30px 20px; }
+        section {
+            margin-bottom: 60px; padding: 40px 20px;
+            background: rgba(255,255,255,0.03); border-radius: 15px;
+            border: 1px solid rgba(212,175,55,0.2); scroll-margin-top: 20px;
+            will-change: transform;
+        }
+        h2 { font-family: 'Playfair Display', serif; color: #d4af37; font-size: 2rem; margin-bottom: 10px; }
+        .sub { font-family: 'Great Vibes', cursive; color: #f0d060; font-size: 1.5rem; margin-bottom: 25px; }
+        .ayat { font-style: italic; line-height: 1.8; font-size: 1.1rem; }
+        .ayat strong { color: #d4af37; font-style: normal; }
+
+        .mempelai { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; align-items: center; }
+        .orang { flex: 1; min-width: 250px; }
+        .foto-profil {
+            width: 180px; height: 180px; border-radius: 50%;
+            border: 4px solid #d4af37; object-fit: cover; object-position: top;
+            margin-bottom: 15px; transition: transform 0.5s;
+        }
+        .foto-profil:hover { transform: scale(1.1) rotate(5deg); }
+        .orang h3 { font-family: 'Great Vibes', cursive; color: #d4af37; font-size: 2.5rem; }
+        .orang .nama-lengkap { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: white; margin: 10px 0; }
+        .orang p { font-size: 0.9rem; line-height: 1.5; }
+        .ampersand { font-family: 'Great Vibes', cursive; font-size: 4rem; color: #d4af37; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        .acara-card {
+            background: linear-gradient(135deg, #1a2744, #2a3f6f);
+            padding: 25px; border-radius: 12px; margin-bottom: 15px;
+            border-left: 5px solid #d4af37; text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .acara-card:hover { transform: translateX(10px); box-shadow: 0 10px 30px rgba(212,175,55,0.3); }
+        .acara-card h3 { color: #d4af37; font-size: 1.3rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+        .acara-card p { margin-bottom: 10px; font-size: 0.95rem; }
+        .acara-card .label { color: #d4af37; font-weight: bold; }
+
+        .btn-maps {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 15px; padding: 12px 25px;
+            background: linear-gradient(135deg, #4285F4, #34A853);
+            color: white; text-decoration: none; border-radius: 50px;
+            font-weight: bold; font-size: 0.9rem; transition: all 0.3s;
+            border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(66,133,244,0.4);
+        }
+        .btn-maps:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(66,133,244,0.6); }
+        .btn-maps-resepsi { background: linear-gradient(135deg, #EA4335, #FBBC05); box-shadow: 0 4px 15px rgba(234,67,53,0.4); }
+
+        .slider-container { position: relative; max-width: 100%; margin: 20px auto; overflow: hidden; border-radius: 15px; border: 2px solid rgba(212,175,55,0.3); }
+        .slider { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; height: 300px; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slider-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(212,175,55,0.8); color: #0a0f1e; border: none;
+            padding: 15px 20px; cursor: pointer; font-size: 1.5rem;
+            border-radius: 50%; transition: all 0.3s; z-index: 10;
+        }
+        .slider-btn:hover { background: #d4af37; transform: translateY(-50%) scale(1.1); }
+        .slider-btn.prev { left: 10px; } .slider-btn.next { right: 10px; }
+        .slider-dots { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s; }
+        .dot.active { background: #d4af37; transform: scale(1.3); }
+
+        .galeri { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
+        .galeri img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(212,175,55,0.3); transition: all 0.3s; }
+        .galeri img:hover { transform: scale(1.05); border-color: #d4af37; }
+        .galeri img:first-child { grid-column: span 2; height: 250px; }
+
+        .keluarga { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; font-size: 0.85rem; }
+        @media (max-width: 600px) { .keluarga { grid-template-columns: 1fr; } .cover-content .nama { font-size: 3rem; } .slide { height: 250px; } }
+        .keluarga h4 { color: #d4af37; margin-bottom: 5px; margin-top: 10px; }
+        .keluarga h4:first-child { margin-top: 0; }
+
+        footer { padding: 30px 20px; font-size: 0.85rem; color: #94a3b8; border-top: 1px solid rgba(212,175,55,0.2); }
+        footer .terima-kasih { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #d4af37; margin-bottom: 10px; }
+
+        .music-control {
+            position: fixed; bottom: 20px; right: 20px;
+            width: 55px; height: 55px;
+            background: linear-gradient(135deg, #d4af37, #f0d060);
+            border-radius: 50%; border: none; cursor: pointer; z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4); transition: all 0.3s;
+        }
+        .music-control:hover { transform: scale(1.1); }
+        .music-control.playing { animation: rotate 3s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .music-icon { font-size: 1.5rem; color: #0a0f1e; }
+
+        .scroll-top {
+            position: fixed; bottom: 20px; left: 20px;
+            width: 50px; height: 50px; background: #d4af37;
+            border-radius: 50%; border: none; cursor: pointer; z-index: 1000;
+            display: none; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: #0a0f1e; transition: all 0.3s;
+        }
+        .scroll-top:hover { transform: scale(1.1); }
+        .scroll-top.show { display: flex; }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 4px;
+            background: linear-gradient(90deg, #d4af37, #f0d060);
+            z-index: 1001; transition: width 0.3s;
+        }
+
+        .auto-scroll-control {
+            position: fixed; top: 20px; right: 20px;
+            width: 50px; height: 50px;
+            background: rgba(10, 15, 30, 0.9); border: 2px solid #d4af37;
+            border-radius: 50%; cursor: pointer; z-index: 1000;
+            display: none; align-items: center; justify-content: center;
+            font-size: 1.3rem; color: #d4af37; transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .auto-scroll-control.show { display: flex; }
+        .auto-scroll-control:hover { transform: scale(1.1); background: #d4af37; color: #0a0f1e; }
+        .auto-scroll-control.active { background: #d4af37; color: #0a0f1e; animation: pulse-gold 2s infinite; }
+        @keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); } 50% { box-shadow: 0 0 0 15px rgba(212,175,55,0); } }
+
+        .touch-notice {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            background: rgba(10, 15, 30, 0.95); border: 2px solid #d4af37;
+            padding: 20px 30px; border-radius: 15px;
+            color: #d4af37; font-size: 1rem; font-weight: bold;
+            z-index: 1002; opacity: 0; pointer-events: none;
+            transition: all 0.3s ease-out;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7); text-align: center;
+        }
+        .touch-notice.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .touch-notice .icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+
+        .section-nav {
+            position: fixed; right: 15px; top: 50%; transform: translateY(-50%);
+            display: none; flex-direction: column; gap: 12px; z-index: 999;
+        }
+        .section-nav.show { display: flex; }
+        .section-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: rgba(212,175,55,0.3); border: 2px solid #d4af37;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .section-dot.active { background: #d4af37; transform: scale(1.5); }
+        @media (max-width: 600px) { .section-nav { right: 8px; gap: 8px; } .section-dot { width: 8px; height: 8px; } }
+
+        .speed-indicator {
+            position: fixed; bottom: 90px; left: 20px;
+            background: rgba(10, 15, 30, 0.9); border: 1px solid #d4af37;
+            padding: 8px 15px; border-radius: 20px;
+            color: #d4af37; font-size: 0.75rem;
+            z-index: 1000; display: none;
+        }
+        .speed-indicator.show { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <audio id="bgMusic" loop>
+        <source src="lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="touch-notice" id="touchNotice">
+        <span class="icon">✋</span>
+        Auto-Scroll Berhenti
+    </div>
+
+    <div class="speed-indicator" id="speedIndicator"> Perlahan</div>
+
+    <div id="cover">
+        <div class="cover-content">
+            <h4>SAVE THE DATE</h4>
+            <p style="margin: 10px 0;">Jumat, 16 Oktober 2026</p>
+            <div class="nama">Thomy</div>
+            <div class="dan">&</div>
+            <div class="nama">Yuend</div>
+            <p style="margin-top: 30px;">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
+            <button class="btn-buka" onclick="bukaUndangan()">💌 Buka Undangan</button>
+        </div>
+    </div>
+
+    <button class="auto-scroll-control" id="autoScrollBtn" onclick="toggleAutoScroll()" title="Auto Scroll">
+        <span id="autoScrollIcon">▶</span>
+    </button>
+
+    <div class="section-nav" id="sectionNav"></div>
+
+    <div class="container">
+
+        <section class="scroll-reveal" data-section="0">
+            <p class="ayat">"Aku senantiasa mengucap syukur kepada Allahku karena kamu atas kasih karunia Allah yang dianugerahkan-Nya kepada kamu dalam Kristus Yesus."</p>
+            <p class="ayat"><strong>— 1 Korintus 1:4 —</strong></p>
+        </section>
+
+        <section class="scroll-reveal-scale" data-section="1">
+            <h2>Momen Indah</h2>
+            <div class="sub">Our Journey</div>
+            <div class="slider-container">
+                <div class="slider" id="slider">
+                    <div class="slide"><img src="foto1.jpg" alt="Foto 1"></div>
+                    <div class="slide"><img src="foto2.jpg" alt="Foto 2"></div>
+                    <div class="slide"><img src="foto3.jpg" alt="Foto 3"></div>
+                    <div class="slide"><img src="foto4.jpg" alt="Foto 4"></div>
+                    <div class="slide"><img src="foto5.jpg" alt="Foto 5"></div>
+                </div>
+                <button class="slider-btn prev" onclick="changeSlide(-1)">‹</button>
+                <button class="slider-btn next" onclick="changeSlide(1)">›</button>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </section>
+
+        <section data-section="2">
+            <h2 class="scroll-reveal">Mempelai</h2>
+            <div class="sub scroll-reveal">The Bride & Groom</div>
+            <div class="mempelai">
+                <div class="orang scroll-reveal-left">
+                    <img src="foto-thomy.jpg" alt="Thomy" class="foto-profil">
+                    <h3>Thomy</h3>
+                    <div class="nama-lengkap">Thomy Abraham Neolaka, S.Kom</div>
+                    <p>Putra pertama anak ke tiga dari lima bersaudara</p>
+                    <p style="margin-top: 10px;">Putra dari:<br><strong>Bapak Frans Neolaka (Alm)</strong><br>&<br><strong>Ibu Janse Balukh</strong></p>
+                </div>
+                <div class="ampersand scroll-reveal-scale">&</div>
+                <div class="orang scroll-reveal-right">
+                    <img src="foto-yuend.jpg" alt="Yuend" class="foto-profil">
+                    <h3>Yuend</h3>
+                    <div class="nama-lengkap">Yuni Andriyani Henuk, S.E</div>
+                    <p>Putri tunggal anak pertama dari tiga bersaudara</p>
+                    <p style="margin-top: 10px;">Putri dari:<br><strong>Bapak Yusuf Nahum Urbanus Henuk</strong><br>&<br><strong>Ibu Ernawati Sodakain</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section data-section="3">
+            <h2 class="scroll-reveal">Acara Pernikahan</h2>
+            <div class="sub scroll-reveal">Wedding Event</div>
+            <p class="scroll-reveal" style="font-size: 1.3rem; margin-bottom: 20px; color: white;">Jumat, 16 Oktober 2026</p>
+
+            <div class="acara-card scroll-reveal-left">
+                <h3>💒 Pemberkatan</h3>
+                <p><span class="label">🕙 Waktu:</span> Pukul 10.00 WITA</p>
+                <p><span class="label">📍 Tempat:</span> GMIT Benyamin Oebufu</p>
+                <p><span class="label"> Alamat:</span> Jl. Rukun No. 1, Kelurahan Oebufu</p>
+                <a href="https://maps.app.goo.gl/CiqRh5kqu6uL1Rc67" target="_blank" class="btn-maps">🗺️ Buka Google Maps</a>
+            </div>
+
+            <div class="acara-card scroll-reveal-right">
+                <h3>🎉 Resepsi</h3>
+                <p><span class="label">🕕 Waktu:</span> Pukul 18.00 WITA</p>
+                <p><span class="label">📍 Tempat:</span> Rumah Bapak Yusuf N. U. Henuk</p>
+                <p><span class="label">🏠 Alamat:</span> RT 08/RW 02 Kelurahan Oebufu</p>
+                <a href="https://maps.app.goo.gl/Yd2Yd6MuLJ1GwktD7" target="_blank" class="btn-maps btn-maps-resepsi">📍 Buka Google Maps</a>
+            </div>
+
+            <div class="scroll-reveal" style="margin-top: 20px;">
+                <button onclick="shareLocation()" class="btn-buka" style="font-size: 0.9rem; padding: 12px 25px;">📤 Bagikan Lokasi</button>
+            </div>
+        </section>
+
+        <section data-section="4">
+            <h2 class="scroll-reveal">Galeri Foto</h2>
+            <div class="sub scroll-reveal">Our Moments</div>
+            <div class="galeri">
+                <img src="foto1.jpg" alt="Foto 1" class="scroll-reveal-scale">
+                <img src="foto2.jpg" alt="Foto 2" class="scroll-reveal">
+                <img src="foto3.jpg" alt="Foto 3" class="scroll-reveal">
+                <img src="foto4.jpg" alt="Foto 4" class="scroll-reveal">
+                <img src="foto5.jpg" alt="Foto 5" class="scroll-reveal">
+            </div>
+        </section>
+
+        <section data-section="5">
+            <h2 class="scroll-reveal">Turut Mengundang</h2>
+            <div class="sub scroll-reveal">The Families</div>
+            <div class="keluarga">
+                <div class="scroll-reveal-left">
+                    <h4>Keluarga Besar Neolaka</h4>
+                    <h4>Keluarga Besar Balukh</h4>
+                    <h4>Keluarga Bapak Marthen Tameno</h4>
+                    <h4>Keluarga Bapak Abraham S. M. Selly, S.Sos.,M.Si</h4>
+                </div>
+                <div class="scroll-reveal-right">
+                    <h4>Keluarga Besar Henuk</h4>
+                    <h4>Keluarga Besar Sodakain</h4>
+                    <h4>Keluarga Besar Elik</h4>
+                    <h4>Keluarga Besar Manafe</h4>
+                    <h4>Keluarga Besar Olang</h4>
+                    <h4>Keluarga Bapak Drs. Johanis Munah</h4>
+                    <h4>Keluarga Bapak Dr. Herry Z. Kotta, S.T.,M.T</h4>
+                </div>
+            </div>
+            <p class="scroll-reveal" style="margin-top: 25px; font-style: italic; line-height: 1.6;">"Sukacita kami menjadi sempurna dengan kehadiran dan doa restu dari Bapak/Ibu/Saudara/i bagi putra-putri kami."</p>
+        </section>
+
+    </div>
+
+    <footer class="scroll-reveal" data-section="6">
+        <div class="terima-kasih">Thomy & Yuend</div>
+        <p>Mohon maaf apabila ada salah dalam penulisan nama/gelar</p>
+        <p style="margin-top: 10px;">Design By: Thomy Neo & Netral.T</p>
+    </footer>
+
+    <button class="music-control" id="musicBtn" onclick="toggleMusic()">
+        <span class="music-icon">🎵</span>
+    </button>
+
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // ===== SCROLL REVEAL =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale').forEach(el => observer.observe(el));
+
+        // ===== PROGRESS BAR =====
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
+            document.getElementById('scrollTop').classList.toggle('show', winScroll > 300);
+        });
+
+        // ===== PHOTO SLIDER =====
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const slider = document.getElementById('slider');
+        const dotsContainer = document.getElementById('sliderDots');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+        }
+        function changeSlide(d) { currentSlide = (currentSlide + d + totalSlides) % totalSlides; updateSlider(); }
+        function goToSlide(i) { currentSlide = i; updateSlider(); }
+        setInterval(() => changeSlide(1), 5000);
+        let touchStartX = 0, touchEndX = 0;
+        slider.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        slider.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+        });
+
+        // ===== MUSIC =====
+        let isPlaying = false;
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        function playMusic() { music.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); }).catch(e => console.log(e)); }
+        function toggleMusic() {
+            if (isPlaying) { music.pause(); isPlaying = false; musicBtn.classList.remove('playing'); }
+            else { music.play(); isPlaying = true; musicBtn.classList.add('playing'); }
+        }
+
+        function shareLocation() {
+            const text = `📍 Lokasi Pernikahan Thomy & Yuend\n\n💒 PEMBERKATAN\nGMT Benyamin Oebufu\nJl. Rukun No. 1, Oebufu\n10.00 WITA\n\n🎉 RESEPSI\nRumah Bpk Yusuf N.U. Henuk\nRT 08/RW 02 Oebufu\n18.00 WITA\n\nJumat, 16 Oktober 2026`;
+            if (navigator.share) navigator.share({ title: 'Undangan Thomy & Yuend', text }).catch(()=>{});
+            else { navigator.clipboard.writeText(text).then(()=>alert('✅ Lokasi disalin!')).catch(()=>alert(text)); }
+        }
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        // =====================================================
+        // 🧈 AUTO-SCROLL SUPER HALUS (BUTTER SMOOTH)
+        // Menggunakan teknik:
+        // 1. Easing function (ease-in-out cubic)
+        // 2. Interpolation dengan lerp (linear interpolation)
+        // 3. Direct window.scrollTo() tanpa behavior smooth
+        // 4. requestAnimationFrame untuk 60fps
+        // =====================================================
+        
+        let autoScrollEnabled = false;
+        let autoScrollAnimationId = null;
+        let currentScrollY = window.scrollY;
+        let targetScrollY = window.scrollY;
+        let lastTimestamp = null;
+        
+        // KONFIGURASI KECEPATAN
+        const SCROLL_SPEED = 40; // pixel per detik (kecil = lebih perlahan)
+        const LERP_FACTOR = 0.001; // faktor interpolasi (0.05-0.1 = sangat halus)
+        const SECTION_PAUSE = 2000; // waktu berhenti di setiap section (ms)
+        
+        const sections = document.querySelectorAll('section, footer');
+        const autoScrollBtn = document.getElementById('autoScrollBtn');
+        const autoScrollIcon = document.getElementById('autoScrollIcon');
+        const touchNotice = document.getElementById('touchNotice');
+        const speedIndicator = document.getElementById('speedIndicator');
+        const sectionNav = document.getElementById('sectionNav');
+
+        // Buat section dots
+        sections.forEach((section, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('section-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.onclick = () => { 
+                stopAutoScroll();
+                section.scrollIntoView({ behavior: 'smooth' }); 
+            };
+            sectionNav.appendChild(dot);
+        });
+        const sectionDots = document.querySelectorAll('.section-dot');
+
+        // Easing function: ease-in-out cubic
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        // Linear interpolation
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
+        }
+
+        // Hitung posisi section berikutnya
+        function getNextSectionTarget() {
+            const windowHeight = window.innerHeight;
+            const viewportCenter = currentScrollY + windowHeight * 0.4;
+            
+            for (let section of sections) {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.scrollY;
+                
+                // Jika section belum terlihat penuh, jadikan target
+                if (sectionTop > viewportCenter + 100) {
+                    return sectionTop - windowHeight * 0.1;
+                }
+            }
+            return null; // Sudah di bawah
+        }
+
+        // Main animation loop
+        function smoothScrollLoop(timestamp) {
+            if (!autoScrollEnabled) return;
+            
+            if (!lastTimestamp) lastTimestamp = timestamp;
+            const deltaTime = Math.min((timestamp - lastTimestamp) / 1000, 0.1); // cap di 100ms
+            lastTimestamp = timestamp;
+
+            // Hitung target berikutnya
+            const nextTarget = getNextSectionTarget();
+            
+            if (nextTarget === null) {
+                // Sudah sampai bawah, berhenti
+                stopAutoScroll();
+                return;
+            }
+
+            // Update target scroll
+            targetScrollY = nextTarget;
+
+            // Interpolation (lerp) untuk gerakan super halus
+            const diff = targetScrollY - currentScrollY;
+            
+            // Jika sudah sangat dekat dengan target, tunggu sebentar
+            if (Math.abs(diff) < 5) {
+                // Pause sebentar di section ini
+                setTimeout(() => {
+                    if (autoScrollEnabled) {
+                        lastTimestamp = null; // reset timestamp
+                        autoScrollAnimationId = requestAnimationFrame(smoothScrollLoop);
+                    }
+                }, SECTION_PAUSE);
+                return;
+            }
+
+            // Gerakkan scroll dengan lerp (sangat halus!)
+            currentScrollY = lerp(currentScrollY, targetScrollY, LERP_FACTOR);
+            
+            // Tambahkan gerakan konstan berdasarkan kecepatan
+            currentScrollY += SCROLL_SPEED * deltaTime * 0.3;
+
+            // Pastikan tidak melebihi target
+            if (currentScrollY > targetScrollY) {
+                currentScrollY = targetScrollY;
+            }
+
+            // Apply scroll langsung (tanpa behavior smooth yang bisa bentrok)
+            window.scrollTo(0, Math.round(currentScrollY));
+
+            // Lanjutkan loop
+            autoScrollAnimationId = requestAnimationFrame(smoothScrollLoop);
+        }
+
+        function startAutoScroll() {
+            if (autoScrollEnabled) return;
+            autoScrollEnabled = true;
+            currentScrollY = window.scrollY;
+            targetScrollY = window.scrollY;
+            lastTimestamp = null;
+            autoScrollBtn.classList.add('active');
+            autoScrollIcon.textContent = '⏸';
+            speedIndicator.classList.add('show');
+            
+            autoScrollAnimationId = requestAnimationFrame(smoothScrollLoop);
+        }
+
+        function stopAutoScroll() {
+            autoScrollEnabled = false;
+            autoScrollBtn.classList.remove('active');
+            autoScrollIcon.textContent = '▶';
+            speedIndicator.classList.remove('show');
+            if (autoScrollAnimationId) {
+                cancelAnimationFrame(autoScrollAnimationId);
+                autoScrollAnimationId = null;
+            }
+            lastTimestamp = null;
+        }
+
+        function toggleAutoScroll() {
+            if (autoScrollEnabled) stopAutoScroll();
+            else startAutoScroll();
+        }
+
+        // Berhenti saat layar disentuh
+        function handleTouchStop() {
+            if (autoScrollEnabled) {
+                stopAutoScroll();
+                touchNotice.classList.add('show');
+                setTimeout(() => { touchNotice.classList.remove('show'); }, 1500);
+            }
+        }
+
+        document.addEventListener('touchstart', handleTouchStop, { passive: true });
+        document.addEventListener('mousedown', handleTouchStop);
+        document.addEventListener('wheel', handleTouchStop, { passive: true });
+        document.addEventListener('keydown', (e) => {
+            if (['Space', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown'].includes(e.code)) {
+                handleTouchStop();
+            }
+            if (e.key === 'a' || e.key === 'A') toggleAutoScroll();
+        });
+
+        // Update section dots
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + window.innerHeight / 2;
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.scrollY;
+                const sectionBottom = sectionTop + rect.height;
+                if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                    sectionDots.forEach(d => d.classList.remove('active'));
+                    if (sectionDots[index]) sectionDots[index].classList.add('active');
+                }
+            });
+        }, { passive: true });
+
+        // ===== BUKA UNDANGAN =====
+        function bukaUndangan() {
+            document.getElementById('cover').classList.add('open');
+            playMusic();
+            setTimeout(() => {
+                document.getElementById('autoScrollBtn').classList.add('show');
+                document.getElementById('sectionNav').classList.add('show');
+                setTimeout(() => startAutoScroll(), 2000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
